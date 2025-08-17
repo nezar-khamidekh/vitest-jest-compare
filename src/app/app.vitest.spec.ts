@@ -1,10 +1,13 @@
 import { provideZonelessChangeDetection } from '@angular/core';
-import { TestBed } from '@angular/core/testing';
+import { TestBed, ComponentFixture } from '@angular/core/testing';
 import { describe, beforeEach, it, expect, beforeAll } from 'vitest';
 import { App } from './app';
 import { resolveComponentResourcesForTest } from '../vitest-test-setup';
 
 describe('App', () => {
+  let fixture: ComponentFixture<App>;
+  let app: App;
+
   beforeAll(async () => {
     await resolveComponentResourcesForTest(import.meta.url);
   });
@@ -14,16 +17,16 @@ describe('App', () => {
       imports: [App],
       providers: [provideZonelessChangeDetection()],
     }).compileComponents();
+
+    fixture = TestBed.createComponent(App);
+    app = fixture.componentInstance;
   });
 
   it('should create the app', () => {
-    const fixture = TestBed.createComponent(App);
-    const app = fixture.componentInstance;
     expect(app).toBeTruthy();
   });
 
   it('should render title', () => {
-    const fixture = TestBed.createComponent(App);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
     expect(compiled.querySelector('h1')?.textContent).toContain('Hello, vitest-jest-compare');

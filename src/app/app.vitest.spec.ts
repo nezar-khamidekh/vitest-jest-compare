@@ -1,12 +1,18 @@
 import { provideZonelessChangeDetection } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
+import { describe, beforeEach, it, expect, beforeAll } from 'vitest';
 import { App } from './app';
+import { resolveComponentResourcesForTest } from '../vitest-test-setup';
 
 describe('App', () => {
+  beforeAll(async () => {
+    await resolveComponentResourcesForTest(import.meta.url);
+  });
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [App],
-      providers: [provideZonelessChangeDetection()]
+      providers: [provideZonelessChangeDetection()],
     }).compileComponents();
   });
 

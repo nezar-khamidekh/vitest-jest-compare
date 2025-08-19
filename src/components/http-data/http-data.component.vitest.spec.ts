@@ -1,16 +1,11 @@
 import { provideZonelessChangeDetection } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
-import { describe, beforeEach, it, expect, beforeAll, vi } from 'vitest';
+import { describe, beforeEach, it, expect, vi } from 'vitest';
 import { HttpDataComponent } from './http-data.component';
-import { resolveComponentResourcesForTest } from '../../vitest-test-setup';
 
 describe('HttpDataComponent', () => {
   let fixture: any;
   let component: HttpDataComponent;
-
-  beforeAll(async () => {
-    await resolveComponentResourcesForTest(import.meta.url);
-  });
 
   beforeEach(async () => {
     vi.useFakeTimers();

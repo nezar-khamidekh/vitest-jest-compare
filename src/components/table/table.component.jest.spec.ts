@@ -81,3 +81,4 @@ describe('TableComponent', () => {
     expect(compiled.textContent).toContain('Удалить');
   });
 });
+

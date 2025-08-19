@@ -1,16 +1,11 @@
 import { provideZonelessChangeDetection } from '@angular/core';
 import { TestBed, ComponentFixture } from '@angular/core/testing';
-import { describe, beforeEach, it, expect, beforeAll } from 'vitest';
+import { describe, beforeEach, it, expect } from 'vitest';
 import { CounterComponent } from './counter.component';
-import { resolveComponentResourcesForTest } from '../../vitest-test-setup';
 
 describe('CounterComponent', () => {
   let fixture: ComponentFixture<CounterComponent>;
   let component: CounterComponent;
-
-  beforeAll(async () => {
-    await resolveComponentResourcesForTest(import.meta.url);
-  });
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({

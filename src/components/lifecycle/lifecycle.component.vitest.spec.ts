@@ -1,16 +1,11 @@
 import { provideZonelessChangeDetection } from '@angular/core';
 import { TestBed, ComponentFixture } from '@angular/core/testing';
-import { describe, beforeEach, it, expect, beforeAll, vi } from 'vitest';
+import { describe, beforeEach, it, expect, vi } from 'vitest';
 import { LifecycleComponent } from './lifecycle.component';
-import { resolveComponentResourcesForTest } from '../../vitest-test-setup';
 
 describe('LifecycleComponent', () => {
   let fixture: ComponentFixture<LifecycleComponent>;
   let component: LifecycleComponent;
-
-  beforeAll(async () => {
-    await resolveComponentResourcesForTest(import.meta.url);
-  });
 
   beforeEach(async () => {
     vi.useFakeTimers();

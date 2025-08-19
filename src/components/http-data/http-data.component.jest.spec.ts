@@ -134,3 +134,4 @@ describe('HttpDataComponent', () => {
     expect(compiled.textContent).toContain('Нет данных для отображения');
   });
 });
+

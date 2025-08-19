@@ -70,3 +70,4 @@ describe('LifecycleComponent', () => {
     expect(component.getCounter()).toBeGreaterThan(initialCount);
   });
 });
+

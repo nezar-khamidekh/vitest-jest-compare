@@ -6,6 +6,8 @@ import { globSync } from 'glob';
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 
+let testEnvironmentInitialized = false;
+
 beforeAll(async () => {
   try {
     if (typeof process !== 'undefined' && process.versions?.node) {
@@ -59,7 +61,18 @@ afterEach(getCleanupHook(true));
 @NgModule({ providers })
 export class TestModule {}
 
-getTestBed().initTestEnvironment([BrowserTestingModule, TestModule], platformBrowserTesting(), {
-  errorOnUnknownElements: true,
-  errorOnUnknownProperties: true,
-});
+// Инициализируем тестовое окружение только один раз
+if (!testEnvironmentInitialized) {
+  try {
+    getTestBed().initTestEnvironment([BrowserTestingModule, TestModule], platformBrowserTesting(), {
+      errorOnUnknownElements: true,
+      errorOnUnknownProperties: true,
+    });
+    testEnvironmentInitialized = true;
+  } catch (error) {
+    // Если окружение уже инициализировано, игнорируем ошибку
+    if (!error.message.includes('already been called')) {
+      throw error;
+    }
+  }
+}

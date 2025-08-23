@@ -2,7 +2,8 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "outDir": "./out-tsc/spec",
-    "types": ["vitest/globals", "jest", "node"]
+    "types": ["vitest/globals", "jest", "node"],
+    "isolatedModules": true
   },
   "include": ["src/**/*.ts"]
 }

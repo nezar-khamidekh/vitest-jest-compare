@@ -10,5 +10,33 @@ export default defineConfig({
     environment: 'happy-dom',
     watch: false,
     reporters: ['default'],
+    pool: 'forks',
+    poolOptions: {
+      forks: {
+        singleFork: false,
+        isolate: false,
+      },
+    },
+    cache: {
+      dir: 'node_modules/.vitest',
+    },
+    maxConcurrency: 8,
+    coverage: {
+      enabled: false,
+    },
+    deps: {
+      inline: ['@angular/**'],
+    },
+  },
+  optimizeDeps: {
+    include: [
+      '@angular/core',
+      '@angular/common',
+      '@angular/platform-browser',
+      '@angular/forms',
+      '@angular/router',
+      'rxjs',
+    ],
+    exclude: ['@angular/compiler'],
   },
 });

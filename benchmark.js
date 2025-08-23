@@ -32,7 +32,7 @@ function runBenchmark(iterations = 3) {
 
     // Vitest
     console.log('  Running Vitest...');
-    const vitestTime = runCommand('npm run test:vitest -- --run --reporter=basic');
+    const vitestTime = runCommand('npm run test:vitest -- --run');
     if (vitestTime !== null) {
       vitestTimes.push(vitestTime);
       console.log(`  Vitest completed in ${vitestTime}ms`);

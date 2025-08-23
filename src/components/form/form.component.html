@@ -1,0 +1,150 @@
+<div class="form-container">
+  <h2>User Registration Form</h2>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="registration-form">
+    <div class="form-row">
+      <div class="form-field">
+        <label for="firstName">First Name *</label>
+        <input
+          id="firstName"
+          type="text"
+          formControlName="firstName"
+          placeholder="Enter first name"
+          [class.invalid]="isFieldInvalid('firstName')"
+        />
+        @if (isFieldInvalid('firstName')) {
+        <div class="error-messages">
+          @for (error of getFieldError('firstName'); track error) {
+          <span class="error-message">
+            {{ error }}
+          </span>
+          }
+        </div>
+        }
+      </div>
+
+      <div class="form-field">
+        <label for="lastName">Last Name *</label>
+        <input
+          id="lastName"
+          type="text"
+          formControlName="lastName"
+          placeholder="Enter last name"
+          [class.invalid]="isFieldInvalid('lastName')"
+        />
+        @if (isFieldInvalid('lastName')) {
+        <div class="error-messages">
+          @for (error of getFieldError('lastName'); track error) {
+          <span class="error-message">
+            {{ error }}
+          </span>
+          }
+        </div>
+        }
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-field">
+        <label for="email">Email *</label>
+        <input
+          id="email"
+          type="email"
+          formControlName="email"
+          placeholder="Enter email address"
+          [class.invalid]="isFieldInvalid('email')"
+        />
+        @if (isFieldInvalid('email')) {
+        <div class="error-messages">
+          @for (error of getFieldError('email'); track error) {
+          <span class="error-message">
+            {{ error }}
+          </span>
+          }
+        </div>
+        }
+      </div>
+
+      <div class="form-field">
+        <label for="phone">Phone *</label>
+        <input
+          id="phone"
+          type="tel"
+          formControlName="phone"
+          placeholder="Enter phone number"
+          [class.invalid]="isFieldInvalid('phone')"
+        />
+        @if (isFieldInvalid('phone')) {
+        <div class="error-messages">
+          @for (error of getFieldError('phone'); track error) {
+          <span class="error-message">
+            {{ error }}
+          </span>
+          }
+        </div>
+        }
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-field">
+        <label for="age">Age *</label>
+        <input
+          id="age"
+          type="number"
+          formControlName="age"
+          placeholder="Enter age"
+          min="18"
+          max="120"
+          [class.invalid]="isFieldInvalid('age')"
+        />
+        @if (isFieldInvalid('age')) {
+        <div class="error-messages">
+          @for (error of getFieldError('age'); track error) {
+          <span class="error-message">
+            {{ error }}
+          </span>
+          }
+        </div>
+        }
+      </div>
+
+      <div class="form-field">
+        <label for="bio">Bio</label>
+        <textarea
+          id="bio"
+          formControlName="bio"
+          placeholder="Tell us about yourself (optional)"
+          rows="3"
+          [class.invalid]="isFieldInvalid('bio')"
+        ></textarea>
+        @if (isFieldInvalid('bio')) {
+        <div class="error-messages">
+          @for (error of getFieldError('bio'); track error) {
+          <span class="error-message">
+            {{ error }}
+          </span>
+          }
+        </div>
+        }
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Submit</button>
+      <button type="button" class="btn btn-secondary" (click)="clearForm()">Clear</button>
+    </div>
+  </form>
+
+  @if (isSubmitted) {
+  <div class="form-status">
+    <div class="status-message" [class.success]="form.valid" [class.error]="!form.valid">
+      @if (form.valid) {
+      <span>Form submitted successfully!</span>
+      } @else {
+      <span>Please fix the errors above.</span>
+      }
+    </div>
+  </div>
+  }
+</div>

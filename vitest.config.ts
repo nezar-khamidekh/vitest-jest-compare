@@ -6,6 +6,7 @@ export default defineConfig({
     globals: true,
     setupFiles: ['src/vitest-test-setup.ts'],
     include: ['**/*.vitest.spec.ts'],
+    exclude: ['**/node_modules/**', '**/dist/**', '**/coverage/**'],
     environment: 'happy-dom',
     watch: false,
     reporters: ['default'],

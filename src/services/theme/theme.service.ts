@@ -34,28 +34,11 @@ export class ThemeStorageService {
   }
 
   private getStoredTheme(): Theme {
-    if (typeof window === 'undefined' || !window.localStorage) {
-      return 'light';
-    }
-
-    try {
-      const storedTheme = localStorage.getItem(this.THEME_STORAGE_KEY) as Theme;
-      return storedTheme === 'dark' ? 'dark' : 'light';
-    } catch (error) {
-      console.error('Error reading theme from localStorage:', error);
-      return 'light';
-    }
+    const storedTheme = localStorage.getItem(this.THEME_STORAGE_KEY) as Theme;
+    return storedTheme === 'dark' ? 'dark' : 'light';
   }
 
   private storeTheme(theme: Theme): void {
-    if (typeof window === 'undefined' || !window.localStorage) {
-      return;
-    }
-
-    try {
-      localStorage.setItem(this.THEME_STORAGE_KEY, theme);
-    } catch (error) {
-      console.error('Error saving theme to localStorage:', error);
-    }
+    localStorage.setItem(this.THEME_STORAGE_KEY, theme);
   }
 }

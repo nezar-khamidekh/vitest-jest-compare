@@ -8,12 +8,7 @@ export type Theme = 'dark' | 'light';
 })
 export class ThemeStorageService {
   private readonly THEME_STORAGE_KEY = 'app-theme';
-  private themeSubject: BehaviorSubject<Theme>;
-
-  constructor() {
-    const savedTheme = this.getStoredTheme();
-    this.themeSubject = new BehaviorSubject<Theme>(savedTheme);
-  }
+  private themeSubject: BehaviorSubject<Theme> = new BehaviorSubject<Theme>(this.getStoredTheme());
 
   get theme$(): Observable<Theme> {
     return this.themeSubject.asObservable();

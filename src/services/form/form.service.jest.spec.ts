@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { FormBuilder, ReactiveFormsModule, AbstractControl } from '@angular/forms';
-import { FormService, ContactFormData, UserInfoFormData } from './form.service.';
+import { FormService, ContactFormData, UserInfoFormData } from './form.service';
 import { provideZonelessChangeDetection } from '@angular/core';
 
 describe('FormService', () => {

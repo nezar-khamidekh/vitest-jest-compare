@@ -78,4 +78,4 @@ function runBenchmark(iterations = 3) {
 }
 
 // Run benchmark
-runBenchmark(50);
+runBenchmark(10);

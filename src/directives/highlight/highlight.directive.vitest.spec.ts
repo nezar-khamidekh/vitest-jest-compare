@@ -38,12 +38,10 @@ describe('HighlightDirective', () => {
   });
 
   it('если убрать курсор с элемента, то должен очистить фон', () => {
-    // Сначала устанавливаем фон
     const mouseenterEvent = new Event('mouseenter');
     divElement.dispatchEvent(mouseenterEvent);
     expect(divElement.style.backgroundColor).toBe('yellow');
 
-    // Затем убираем курсор
     const mouseleaveEvent = new Event('mouseleave');
     divElement.dispatchEvent(mouseleaveEvent);
 
@@ -56,12 +54,10 @@ describe('HighlightDirective', () => {
     divElement.dispatchEvent(mouseenterEvent);
     expect(divElement.style.backgroundColor).toBe('yellow');
 
-    // Очищаем фон
     const mouseleaveEvent = new Event('mouseleave');
     divElement.dispatchEvent(mouseleaveEvent);
     expect(divElement.style.backgroundColor).toBe('');
 
-    // Снова наводим курсор
     divElement.dispatchEvent(mouseenterEvent);
     expect(divElement.style.backgroundColor).toBe('yellow');
   });
@@ -70,15 +66,12 @@ describe('HighlightDirective', () => {
     const mouseenterEvent = new Event('mouseenter');
     const mouseleaveEvent = new Event('mouseleave');
 
-    // Устанавливаем фон
     divElement.dispatchEvent(mouseenterEvent);
     expect(divElement.style.backgroundColor).toBe('yellow');
 
-    // Убираем курсор первый раз
     divElement.dispatchEvent(mouseleaveEvent);
     expect(divElement.style.backgroundColor).toBe('');
 
-    // Убираем курсор второй раз (фон уже очищен)
     divElement.dispatchEvent(mouseleaveEvent);
     expect(divElement.style.backgroundColor).toBe('');
   });

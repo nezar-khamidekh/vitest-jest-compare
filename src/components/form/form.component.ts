@@ -1,7 +1,6 @@
 import { Component, OnInit, OnDestroy, inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Subject, takeUntil } from 'rxjs';
-import { ValidationService } from '../../services/validation/validation.service';
 
 export interface FormData {
   firstName: string;
@@ -21,7 +20,6 @@ export interface FormData {
 })
 export class FormComponent implements OnInit, OnDestroy {
   private readonly fb = inject(FormBuilder);
-  private readonly validationService = inject(ValidationService);
 
   form: FormGroup;
   isSubmitted = false;

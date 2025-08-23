@@ -1,39 +1,22 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormComponent, FormData } from './form.component';
-import { ValidationService } from '../../services/validation/validation.service';
-import { describe, it, expect, beforeEach, vi } from 'vitest';
+import { describe, it, expect, beforeEach } from 'vitest';
 import { provideZonelessChangeDetection } from '@angular/core';
 
 describe('FormComponent', () => {
   let component: FormComponent;
   let fixture: ComponentFixture<FormComponent>;
-  let validationService: ValidationService;
 
   beforeEach(async () => {
-    const validationServiceSpy = {
-      validateEmail: vi.fn(),
-      validatePassword: vi.fn(),
-      validatePhoneNumber: vi.fn(),
-      validateRequired: vi.fn(),
-      validateMinLength: vi.fn(),
-      validateMaxLength: vi.fn(),
-      validateNumeric: vi.fn(),
-      validateRange: vi.fn(),
-    };
-
     await TestBed.configureTestingModule({
       declarations: [],
       imports: [ReactiveFormsModule, FormComponent],
-      providers: [
-        provideZonelessChangeDetection(),
-        { provide: ValidationService, useValue: validationServiceSpy },
-      ],
+      providers: [provideZonelessChangeDetection()],
     }).compileComponents();
 
     fixture = TestBed.createComponent(FormComponent);
     component = fixture.componentInstance;
-    validationService = TestBed.inject(ValidationService);
     fixture.detectChanges();
   });
 

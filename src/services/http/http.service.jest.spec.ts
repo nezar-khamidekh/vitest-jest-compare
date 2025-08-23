@@ -245,7 +245,10 @@ describe('HttpService (Jest)', () => {
       });
 
       const req = httpMock.expectOne(url);
-      req.error(new ErrorEvent('Network error'));
+      const errorEvent = new ErrorEvent('network', {
+        message: 'Network error',
+      });
+      req.error(errorEvent);
     });
   });
 
@@ -253,26 +256,22 @@ describe('HttpService (Jest)', () => {
     it('should handle different body types', () => {
       const url = '/api/test';
 
-      // String body
       service.post(url, 'string body').subscribe();
       let req = httpMock.expectOne(url);
       expect(req.request.body).toBe('string body');
       req.flush({});
 
-      // Number body
       service.post(url, 123).subscribe();
       req = httpMock.expectOne(url);
       expect(req.request.body).toBe(123);
       req.flush({});
 
-      // Array body
       const arrayBody = [1, 2, 3];
       service.post(url, arrayBody).subscribe();
       req = httpMock.expectOne(url);
       expect(req.request.body).toEqual(arrayBody);
       req.flush({});
 
-      // Object body
       const objectBody = { key: 'value', nested: { prop: 'val' } };
       service.post(url, objectBody).subscribe();
       req = httpMock.expectOne(url);

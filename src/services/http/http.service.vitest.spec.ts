@@ -5,7 +5,7 @@ import { HttpHeaders, HttpParams } from '@angular/common/http';
 import { provideZonelessChangeDetection } from '@angular/core';
 import { beforeEach, afterEach, describe, it, expect } from 'vitest';
 
-describe('HttpService (Vitest)', () => {
+describe('Если HTTP сервис работает, то', () => {
   let service: HttpService;
   let httpMock: HttpTestingController;
 
@@ -22,7 +22,7 @@ describe('HttpService (Vitest)', () => {
     httpMock.verify();
   });
 
-  describe('GET requests', () => {
+  describe('если выполняются GET запросы, то', () => {
     it('should make GET request without params and headers', () => {
       const url = '/api/test';
       const mockResponse = { data: 'test' };
@@ -85,7 +85,7 @@ describe('HttpService (Vitest)', () => {
     });
   });
 
-  describe('POST requests', () => {
+  describe('если выполняются POST запросы, то', () => {
     it('should make POST request without headers', () => {
       const url = '/api/test';
       const body = { name: 'test', value: 123 };
@@ -119,7 +119,7 @@ describe('HttpService (Vitest)', () => {
     });
   });
 
-  describe('PUT requests', () => {
+  describe('если выполняются PUT запросы, то', () => {
     it('should make PUT request without headers', () => {
       const url = '/api/test/1';
       const body = { name: 'updated', value: 456 };
@@ -153,7 +153,7 @@ describe('HttpService (Vitest)', () => {
     });
   });
 
-  describe('DELETE requests', () => {
+  describe('если выполняются DELETE запросы, то', () => {
     it('should make DELETE request without headers', () => {
       const url = '/api/test/1';
       const mockResponse = { success: true };
@@ -246,7 +246,10 @@ describe('HttpService (Vitest)', () => {
       });
 
       const req = httpMock.expectOne(url);
-      req.error(new ErrorEvent('Network error'));
+      const errorEvent = new ErrorEvent('network', {
+        message: 'Network error',
+      });
+      req.error(errorEvent);
     });
   });
 
@@ -254,26 +257,22 @@ describe('HttpService (Vitest)', () => {
     it('should handle different body types', () => {
       const url = '/api/test';
 
-      // String body
       service.post(url, 'string body').subscribe();
       let req = httpMock.expectOne(url);
       expect(req.request.body).toBe('string body');
       req.flush({});
 
-      // Number body
       service.post(url, 123).subscribe();
       req = httpMock.expectOne(url);
       expect(req.request.body).toBe(123);
       req.flush({});
 
-      // Array body
       const arrayBody = [1, 2, 3];
       service.post(url, arrayBody).subscribe();
       req = httpMock.expectOne(url);
       expect(req.request.body).toEqual(arrayBody);
       req.flush({});
 
-      // Object body
       const objectBody = { key: 'value', nested: { prop: 'val' } };
       service.post(url, objectBody).subscribe();
       req = httpMock.expectOne(url);

@@ -1,37 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormComponent, FormData } from './form.component';
-import { ValidationService } from '../../services/validation/validation.service';
 import { provideZonelessChangeDetection } from '@angular/core';
 
 describe('FormComponent', () => {
   let component: FormComponent;
   let fixture: ComponentFixture<FormComponent>;
-  let validationService: jest.Mocked<ValidationService>;
 
   beforeEach(async () => {
-    const validationServiceSpy = jest.mocked({
-      validateEmail: jest.fn(),
-      validatePassword: jest.fn(),
-      validatePhoneNumber: jest.fn(),
-      validateRequired: jest.fn(),
-      validateMinLength: jest.fn(),
-      validateMaxLength: jest.fn(),
-      validateNumeric: jest.fn(),
-      validateRange: jest.fn(),
-    } as ValidationService);
-
     await TestBed.configureTestingModule({
       imports: [FormComponent, ReactiveFormsModule],
-      providers: [
-        provideZonelessChangeDetection(),
-        { provide: ValidationService, useValue: validationServiceSpy },
-      ],
+      providers: [provideZonelessChangeDetection()],
     }).compileComponents();
 
     fixture = TestBed.createComponent(FormComponent);
     component = fixture.componentInstance;
-    validationService = TestBed.inject(ValidationService) as jest.Mocked<ValidationService>;
     fixture.detectChanges();
   });
 

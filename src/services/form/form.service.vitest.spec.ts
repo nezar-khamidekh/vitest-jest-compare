@@ -48,15 +48,12 @@ describe('FormService', () => {
       const form = service.createContactForm();
       const nameControl = form.get('name') as AbstractControl;
 
-      // Проверка required валидатора
       nameControl.setValue('');
       expect(nameControl.hasError('required')).toBe(true);
 
-      // Проверка minLength валидатора
       nameControl.setValue('a');
       expect(nameControl.hasError('minlength')).toBe(true);
 
-      // Проверка valid значения
       nameControl.setValue('John');
       expect(nameControl.valid).toBe(true);
     });
@@ -65,15 +62,12 @@ describe('FormService', () => {
       const form = service.createContactForm();
       const emailControl = form.get('email') as AbstractControl;
 
-      // Проверка required валидатора
       emailControl.setValue('');
       expect(emailControl.hasError('required')).toBe(true);
 
-      // Проверка email валидатора
       emailControl.setValue('invalid-email');
       expect(emailControl.hasError('email')).toBe(true);
 
-      // Проверка valid значения
       emailControl.setValue('john@example.com');
       expect(emailControl.valid).toBe(true);
     });
@@ -82,15 +76,12 @@ describe('FormService', () => {
       const form = service.createContactForm();
       const phoneControl = form.get('phone') as AbstractControl;
 
-      // Проверка pattern валидатора
       phoneControl.setValue('invalid-phone');
       expect(phoneControl.hasError('pattern')).toBe(true);
 
-      // Проверка valid значения
       phoneControl.setValue('+1234567890');
       expect(phoneControl.valid).toBe(true);
 
-      // Проверка что поле не обязательное
       phoneControl.setValue('');
       expect(phoneControl.valid).toBe(true);
     });
@@ -143,15 +134,12 @@ describe('FormService', () => {
       const form = service.createUserInfoForm();
       const usernameControl = form.get('username') as AbstractControl;
 
-      // Проверка required валидатора
       usernameControl.setValue('');
       expect(usernameControl.hasError('required')).toBe(true);
 
-      // Проверка minLength валидатора
       usernameControl.setValue('ab');
       expect(usernameControl.hasError('minlength')).toBe(true);
 
-      // Проверка valid значения
       usernameControl.setValue('johndoe');
       expect(usernameControl.valid).toBe(true);
     });
@@ -160,19 +148,15 @@ describe('FormService', () => {
       const form = service.createUserInfoForm();
       const ageControl = form.get('age') as AbstractControl;
 
-      // Проверка required валидатора
       ageControl.setValue(null);
       expect(ageControl.hasError('required')).toBe(true);
 
-      // Проверка min валидатора
       ageControl.setValue(17);
       expect(ageControl.hasError('min')).toBe(true);
 
-      // Проверка max валидатора
       ageControl.setValue(121);
       expect(ageControl.hasError('max')).toBe(true);
 
-      // Проверка valid значения
       ageControl.setValue(25);
       expect(ageControl.valid).toBe(true);
     });
@@ -181,16 +165,13 @@ describe('FormService', () => {
       const form = service.createUserInfoForm();
       const addressControl = form.get('address') as AbstractControl;
 
-      // Проверка maxLength валидатора
       const longAddress = 'a'.repeat(101);
       addressControl.setValue(longAddress);
       expect(addressControl.hasError('maxlength')).toBe(true);
 
-      // Проверка valid значения
       addressControl.setValue('123 Main St');
       expect(addressControl.valid).toBe(true);
 
-      // Проверка что поле не обязательное
       addressControl.setValue('');
       expect(addressControl.valid).toBe(true);
     });

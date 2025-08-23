@@ -3,7 +3,7 @@ import { TestBed } from '@angular/core/testing';
 import { CacheService } from './cache.service';
 import { provideZonelessChangeDetection } from '@angular/core';
 
-describe('CacheService (Vitest)', () => {
+describe('Если сервис кэширования работает, то', () => {
   let service: CacheService;
 
   beforeEach(() => {
@@ -17,7 +17,7 @@ describe('CacheService (Vitest)', () => {
     service.clear();
   });
 
-  describe('set and get', () => {
+  describe('если данные сохраняются и извлекаются, то', () => {
     it('should set and get a value', () => {
       const key = 'test-key';
       const value = { data: 'test-data' };
@@ -51,7 +51,7 @@ describe('CacheService (Vitest)', () => {
     });
   });
 
-  describe('TTL functionality', () => {
+  describe('если используется TTL функциональность, то', () => {
     beforeEach(() => {
       vi.useFakeTimers();
     });
@@ -63,12 +63,11 @@ describe('CacheService (Vitest)', () => {
     it('should expire items after TTL', () => {
       const key = 'expiring-key';
       const value = 'test-value';
-      const ttl = 1000; // 1 second
+      const ttl = 1000;
 
       service.set(key, value, ttl);
       expect(service.get(key)).toBe(value);
 
-      // Advance time past TTL
       vi.advanceTimersByTime(1001);
       expect(service.get(key)).toBeNull();
     });
@@ -80,7 +79,6 @@ describe('CacheService (Vitest)', () => {
       service.set(key, value);
       expect(service.get(key)).toBe(value);
 
-      // Advance time significantly
       vi.advanceTimersByTime(10000);
       expect(service.get(key)).toBe(value);
     });
@@ -98,7 +96,7 @@ describe('CacheService (Vitest)', () => {
     });
   });
 
-  describe('has method', () => {
+  describe('если проверяется наличие ключа, то', () => {
     it('should return true for existing key', () => {
       const key = 'test-key';
       service.set(key, 'value');
@@ -110,7 +108,7 @@ describe('CacheService (Vitest)', () => {
     });
   });
 
-  describe('delete method', () => {
+  describe('если удаляется ключ, то', () => {
     it('should delete existing key', () => {
       const key = 'test-key';
       service.set(key, 'value');
@@ -127,7 +125,7 @@ describe('CacheService (Vitest)', () => {
     });
   });
 
-  describe('clear method', () => {
+  describe('если очищается кэш, то', () => {
     it('should clear all items', () => {
       service.set('key1', 'value1');
       service.set('key2', 'value2');
@@ -140,7 +138,7 @@ describe('CacheService (Vitest)', () => {
     });
   });
 
-  describe('size method', () => {
+  describe('если проверяется размер кэша, то', () => {
     it('should return correct size', () => {
       expect(service.size()).toBe(0);
 
@@ -155,7 +153,7 @@ describe('CacheService (Vitest)', () => {
     });
   });
 
-  describe('keys method', () => {
+  describe('если получаются все ключи, то', () => {
     it('should return all keys', () => {
       service.set('key1', 'value1');
       service.set('key2', 'value2');
@@ -174,7 +172,7 @@ describe('CacheService (Vitest)', () => {
     });
   });
 
-  describe('values method', () => {
+  describe('если получаются все значения, то', () => {
     it('should return all values', () => {
       const value1 = { id: 1, name: 'test1' };
       const value2 = { id: 2, name: 'test2' };
@@ -189,7 +187,7 @@ describe('CacheService (Vitest)', () => {
     });
   });
 
-  describe('entries method', () => {
+  describe('если получаются все пары ключ-значение, то', () => {
     it('should return all key-value pairs', () => {
       const value1 = { id: 1, name: 'test1' };
       const value2 = { id: 2, name: 'test2' };
@@ -204,7 +202,7 @@ describe('CacheService (Vitest)', () => {
     });
   });
 
-  describe('getWithTimestamp method', () => {
+  describe('если получается значение с временной меткой, то', () => {
     it('should return value with timestamp', () => {
       const key = 'test-key';
       const value = 'test-value';
@@ -241,7 +239,7 @@ describe('CacheService (Vitest)', () => {
     });
   });
 
-  describe('isExpired method', () => {
+  describe('если проверяется истечение срока действия, то', () => {
     beforeEach(() => {
       vi.useFakeTimers();
     });
@@ -279,7 +277,7 @@ describe('CacheService (Vitest)', () => {
     });
   });
 
-  describe('getExpiredKeys method', () => {
+  describe('если получаются истекшие ключи, то', () => {
     beforeEach(() => {
       vi.useFakeTimers();
     });
@@ -312,7 +310,7 @@ describe('CacheService (Vitest)', () => {
     });
   });
 
-  describe('cleanupExpired method', () => {
+  describe('если очищаются истекшие элементы, то', () => {
     beforeEach(() => {
       vi.useFakeTimers();
     });

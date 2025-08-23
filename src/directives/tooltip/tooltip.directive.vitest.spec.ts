@@ -38,12 +38,10 @@ describe('TooltipDirective', () => {
   });
 
   it('если убрать курсор с элемента, то должен очистить title атрибут', () => {
-    // Сначала устанавливаем title
     const mouseenterEvent = new Event('mouseenter');
     buttonElement.dispatchEvent(mouseenterEvent);
     expect(buttonElement.title).toBe('This is a tooltip');
 
-    // Затем убираем курсор
     const mouseleaveEvent = new Event('mouseleave');
     buttonElement.dispatchEvent(mouseleaveEvent);
 
@@ -56,12 +54,10 @@ describe('TooltipDirective', () => {
     buttonElement.dispatchEvent(mouseenterEvent);
     expect(buttonElement.title).toBe('This is a tooltip');
 
-    // Очищаем title
     const mouseleaveEvent = new Event('mouseleave');
     buttonElement.dispatchEvent(mouseleaveEvent);
     expect(buttonElement.title).toBe('');
 
-    // Снова наводим курсор
     buttonElement.dispatchEvent(mouseenterEvent);
     expect(buttonElement.title).toBe('This is a tooltip');
   });
@@ -70,15 +66,12 @@ describe('TooltipDirective', () => {
     const mouseenterEvent = new Event('mouseenter');
     const mouseleaveEvent = new Event('mouseleave');
 
-    // Устанавливаем title
     buttonElement.dispatchEvent(mouseenterEvent);
     expect(buttonElement.title).toBe('This is a tooltip');
 
-    // Убираем курсор первый раз
     buttonElement.dispatchEvent(mouseleaveEvent);
     expect(buttonElement.title).toBe('');
 
-    // Убираем курсор второй раз (title уже пустой)
     buttonElement.dispatchEvent(mouseleaveEvent);
     expect(buttonElement.title).toBe('');
   });

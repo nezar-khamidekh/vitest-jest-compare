@@ -43,4 +43,3 @@ describe('CounterComponent', () => {
     expect(component.count()).toBe(0);
   });
 });
-

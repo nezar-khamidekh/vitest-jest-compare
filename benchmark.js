@@ -45,13 +45,9 @@ function runBenchmark(iterations = 3) {
   const jestAvg = jestTimes.reduce((a, b) => a + b, 0) / jestTimes.length;
   const vitestAvg = vitestTimes.reduce((a, b) => a + b, 0) / vitestTimes.length;
 
-  // Calculate improvement
-  const improvement = ((jestAvg - vitestAvg) / jestAvg) * 100;
-
   console.log('=== RESULTS ===');
   console.log(`Jest average time: ${jestAvg.toFixed(0)}ms`);
   console.log(`Vitest average time: ${vitestAvg.toFixed(0)}ms`);
-  console.log(`Vitest is ${improvement.toFixed(1)}% faster than Jest`);
   console.log('');
 
   console.log('Detailed times:');
@@ -70,7 +66,6 @@ function runBenchmark(iterations = 3) {
       times: vitestTimes,
       average: vitestAvg,
     },
-    improvement: improvement,
   };
 
   fs.writeFileSync('benchmark-results.json', JSON.stringify(results, null, 2));

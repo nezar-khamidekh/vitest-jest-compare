@@ -10,11 +10,12 @@ export default defineConfig({
     environment: 'happy-dom',
     watch: false,
     reporters: ['default'],
-    pool: 'forks',
+    pool: 'threads',
+    isolate: true,
     poolOptions: {
-      forks: {
-        singleFork: false,
-        isolate: false,
+      threads: {
+        singleThread: true,
+        isolate: true,
       },
     },
     cache: {
@@ -27,6 +28,9 @@ export default defineConfig({
     deps: {
       inline: ['@angular/**'],
     },
+    testTimeout: 10000,
+    hookTimeout: 10000,
+    teardownTimeout: 10000,
   },
   optimizeDeps: {
     include: [

@@ -11,11 +11,11 @@ export default defineConfig({
     watch: false,
     reporters: ['default'],
     pool: 'threads',
-    isolate: true,
     poolOptions: {
       threads: {
         singleThread: true,
         isolate: true,
+        useAtomics: true,
       },
     },
     cache: {
